@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
-    <title>PawScan</title>
+    <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="PawScan" name="keywords">
-    <meta content="PawScan" name="description">
+    <meta content="FacultyScan" name="keywords">
+    <meta content="FacultyScan" name="description">
 
 
     <!-- Google Web Fonts -->

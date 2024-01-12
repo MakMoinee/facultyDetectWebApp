@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sonograms', function (Blueprint $table) {
-            $table->id('sonogramID')->autoIncrement();
+        Schema::create('faculty', function (Blueprint $table) {
+            $table->id('facultyID')->autoIncrement();
             $table->integer('userID');
-            $table->string('petName');
+            $table->string('firstName');
+            $table->string('middleName');
+            $table->string('lastName');
+            $table->string('subject');
             $table->string('imagePath');
             $table->string('status');
             $table->string('remarks')->nullable(true);
-            $table->string('approver')->nullable(true);
             $table->timestamps();
         });
     }

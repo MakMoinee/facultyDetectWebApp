@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id("resultID");
-            $table->integer("sonogramID");
-            $table->string("age");
-            $table->string("pregnancyStage");
-            $table->string("numberOfFetus");
-            $table->string("healthStatus");
+            $table->integer("facultyID");
+            $table->date("detectedDate");
             $table->string("imagePath");
+            $table->string("status");
             $table->timestamps();
         });
     }

@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
-    <title>PawScan</title>
+    <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="PawScan" name="keywords">
-    <meta content="PawScan" name="description">
+    <meta content="FacultyScan" name="keywords">
+    <meta content="FacultyScan" name="description">
 
 
     <!-- Google Web Fonts -->
@@ -63,7 +63,7 @@
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>pawscan@gmail.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>FacultyScan@gmail.com</p>
                     </div>
                     <div class="py-2">
                         <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -78,7 +78,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-paw me-2"></i>PawScan</h1>
+            <h1 class="m-0 text-primary"><i class="fa fa-paw me-2"></i>FacultyScan</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -106,9 +106,9 @@
                 <div class="col-lg-7">
                     <div class="section-title mb-4">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>
-                        <h1 class="display-5 mb-0">PawScan - Your Trusted Sonogram Analysis Partner</h1>
+                        <h1 class="display-5 mb-0">FacultyScan - Your Trusted Sonogram Analysis Partner</h1>
                     </div>
-                    <h4 class="text-body fst-italic mb-4">At PawScan, we are passionate about providing reliable and
+                    <h4 class="text-body fst-italic mb-4">At FacultyScan, we are passionate about providing reliable and
                         accurate sonogram scanning services for Shi Tzus. As a leading web application, we specialize in
                         analyzing sonogram images uploaded by users to provide valuable insights into the health and
                         condition of their furry companions' Shi Tzu.</h4>
@@ -161,7 +161,7 @@
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Get In Touch</h3>
                     <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>pawscan@gmail.com</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>FacultyScan@gmail.com</p>
                     <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -184,7 +184,7 @@
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="/">PawScan</a>.
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="/">FacultyScan</a>.
                         All Rights Reserved.</p>
                 </div>
                 
