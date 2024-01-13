@@ -169,7 +169,7 @@
                         <a class="text-light mb-2" href="/userdashboard"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Home</a>
                         <a class="text-light" href="/faculty"><i
-                                class="bi bi-arrow-right text-primary me-2"></i>Sonogram</a>
+                                class="bi bi-arrow-right text-primary me-2"></i>Faculty</a>
                         <a class="text-light" href="/account"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Account</a>
                     </div>
