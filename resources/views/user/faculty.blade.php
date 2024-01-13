@@ -88,7 +88,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/userdashboard" class="nav-item nav-link">Home</a>
-                <a href="/faculty" class="nav-item nav-link active">Faculty</a>
+                <a href="/faculty" class="nav-item nav-link active">Detections</a>
                 <a href="/account" class="nav-item nav-link">Account</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="section-body mb-2">
                         {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload
-                            Sonogram</button> --}}
+                            Faculty</button> --}}
                     </div>
                     <div class="table-responsive mb-5">
                         <table class="table border mb-0" id="sortTable">
@@ -167,191 +167,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sonograms as $item)
-                                    <tr class="align-middle">
-                                        <td class="text-center">
 
-                                        </td>
-                                        <td>
-                                            {{ $item['facultyName'] }}
-                                        </td>
-                                        <td class="text-center">
-                                            {{ date('Y-m-d', strtotime($item['created_at'])) }}
-                                        </td>
-                                        <td>
-                                            {{ $item['status'] }}
-                                        </td>
-                                        <td class="text-center">
-                                            @if (isset($item['remarks']) && $item['remarks'] != '')
-                                                @if ($item['remarks'] == 'See Results')
-                                                    <a target="_blank" href="/results?id={{ $item['facultyID'] }}"
-                                                        class="btn btn-primary">{{ $item['remarks'] }}</a>
-                                                @else
-                                                    {{ $item['remarks'] }}
-                                                @endif
-                                            @else
-                                                None
-                                            @endif
-
-                                        </td>
-                                        <td>
-                                            @if ($item['remarks'] == 'See Results')
-                                                <button class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal{{ $item['facultyID'] }}">Delete</button>
-                                                <div class="modal fade " id="deleteModal{{ $item['facultyID'] }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="deleteModalLabel{{ $item['facultyID'] }}"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <form
-                                                                        action="{{ route('faculty.destroy', ['faculty' => $item['facultyID']]) }}"
-                                                                        method="POST" enctype="multipart/form-data"
-                                                                        autocomplete="off">
-                                                                        @method('delete')
-                                                                        @csrf
-                                                                        <center>
-                                                                            <div class="form-group">
-                                                                                <h4>Are You Sure You Want To Delete This
-                                                                                    Sonogram Record ?</h4>
-                                                                                <input type="hidden"
-                                                                                    name="origImagePath"
-                                                                                    value="{{ $item['imagePath'] }}">
-                                                                            </div>
-                                                                        </center>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary"
-                                                                    name="btnDeleteSonogram" value="yes">Yes,
-                                                                    proceed</button>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#viewModal{{ $item['facultyID'] }}">View</button>
-                                                <div class="modal fade " id="viewModal{{ $item['facultyID'] }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="viewModalLabel{{ $item['facultyID'] }}"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"
-                                                                    id="viewModalLabel{{ $item['facultyID'] }}">
-                                                                    View
-                                                                    Sonogram</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <form action="#" method="POST"
-                                                                        enctype="multipart/form-data"
-                                                                        autocomplete="off">
-                                                                        @csrf
-                                                                        <center>
-                                                                            <div class="form-group">
-                                                                                <label for="facultyName"
-                                                                                    style="float: left;">Pet
-                                                                                    Name:</label>
-                                                                                <br>
-                                                                                <input readonly type="text"
-                                                                                    name="facultyName" id=""
-                                                                                    placeholder="Pet Name"
-                                                                                    class="form-control"
-                                                                                    value="{{ $item['facultyName'] }}">
-                                                                            </div>
-                                                                            <br>
-                                                                            <div class="form-group">
-                                                                                <label for="sonogram"
-                                                                                    style="float: left;">Uploaded
-                                                                                    Sonogram:</label>
-                                                                                <br>
-                                                                                <img style="margin-top: 10px"
-                                                                                    src="{{ $item['imagePath'] }}"
-                                                                                    alt="" srcset=""
-                                                                                    class="form-control">
-                                                                            </div>
-                                                                            <br>
-                                                                            @if ($item['remarks'] != 'See Results')
-                                                                                <div class="form-group">
-                                                                                    <label for="sonogram"
-                                                                                        style="float: left;">Remarks:</label>
-                                                                                    <br>
-                                                                                    <input readonly type="text"
-                                                                                        name="" id=""
-                                                                                        value="{{ $item['remarks'] }}"
-                                                                                        class="form-control">
-                                                                                </div>
-                                                                            @endif
-
-                                                                        </center>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal{{ $item['facultyID'] }}">Delete</button>
-                                                <div class="modal fade " id="deleteModal{{ $item['facultyID'] }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="deleteModalLabel{{ $item['facultyID'] }}"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <form
-                                                                        action="{{ route('faculty.destroy', ['faculty' => $item['facultyID']]) }}"
-                                                                        method="POST" enctype="multipart/form-data"
-                                                                        autocomplete="off">
-                                                                        @method('delete')
-                                                                        @csrf
-                                                                        <center>
-                                                                            <div class="form-group">
-                                                                                <h4>Are You Sure You Want To Delete This
-                                                                                    Sonogram Record ?</h4>
-                                                                                <input type="hidden"
-                                                                                    name="origImagePath"
-                                                                                    value="{{ $item['imagePath'] }}">
-                                                                            </div>
-                                                                        </center>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary"
-                                                                    name="btnDeleteSonogram" value="yes">Yes,
-                                                                    proceed</button>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -517,7 +333,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Upload Sonogram</h5>
+                    <h5 class="modal-title" id="uploadModalLabel">Upload Faculty</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -551,9 +367,9 @@
                                     </div>
                                     <br>
                                     <div>
-                                        <p><b>Important Note:</b> To ensure accurate results for the sonogram analysis,
+                                        <p><b>Important Note:</b> To ensure accurate results for the Faculty analysis,
                                             we
-                                            recommend a Shih Tzu's sonogram.
+                                            recommend a Shih Tzu's Faculty.
                                             Please note that using a different
                                             breed of pet may result in vague or inconclusive results. Thank you for your
                                             understanding and cooperation in helping us provide the best possible
@@ -646,7 +462,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: 'Failed to add Sonogram, Invalid File Format, Please try accepted file format: .jpg, .png, .jpeg',
+                    title: 'Failed to add Faculty, Invalid File Format, Please try accepted file format: .jpg, .png, .jpeg',
                     showConfirmButton: false,
                     timer: 800
                 });
@@ -676,7 +492,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: 'Failed to delete Sonogram, Please try again later',
+                    title: 'Failed to delete Faculty, Please try again later',
                     showConfirmButton: false,
                     timer: 800
                 });
@@ -691,7 +507,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: 'Failed to add Sonogram, Please try again later',
+                    title: 'Failed to add Faculty, Please try again later',
                     showConfirmButton: false,
                     timer: 800
                 });
@@ -721,7 +537,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Deleted Sonogram',
+                    title: 'Successfully Deleted Faculty',
                     showConfirmButton: false,
                     timer: 800
                 });
@@ -736,7 +552,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Uploaded Sonogram',
+                    title: 'Successfully Uploaded Faculty',
                     showConfirmButton: false,
                     timer: 800
                 });

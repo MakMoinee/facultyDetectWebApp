@@ -87,7 +87,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/userdashboard" class="nav-item nav-link active">Home</a>
-                <a href="/faculty" class="nav-item nav-link">Faculty</a>
+                <a href="/faculty" class="nav-item nav-link">Detections</a>
                 <a href="/account" class="nav-item nav-link">Account</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
