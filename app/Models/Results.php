@@ -14,7 +14,7 @@ class Results extends Model
 
     protected $fillable = [
         'resultID',
-        'sonogramID',
+        'facultyID',
         "age",
         "pregnancyStage",
         "numberOfFetus",

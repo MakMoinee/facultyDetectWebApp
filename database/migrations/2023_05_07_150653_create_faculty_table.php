@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('faculty', function (Blueprint $table) {
             $table->id('facultyID')->autoIncrement();
-            $table->integer('userID');
-            $table->string('firstName');
-            $table->string('middleName');
-            $table->string('lastName');
-            $table->string('subject');
+            $table->string('facultyName');
             $table->string('imagePath');
             $table->string('status');
             $table->string('remarks')->nullable(true);

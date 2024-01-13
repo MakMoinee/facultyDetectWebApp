@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
+    <link rel="icon" href="/img/student.png" type="image/x-icon">
     <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="FacultyScan" name="keywords">
@@ -79,7 +79,8 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-paw me-2"></i>FacultyScan</h1>
+            <h1 class="m-0 text-primary"><img src="/img/student.png" width="46px" height="46px" alt=""
+                    srcset="">FacultyScan</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -87,7 +88,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/admindashboard" class="nav-item nav-link">Home</a>
-                <a href="/adminsono" class="nav-item nav-link">Sonogram</a>
+                <a href="/adminsono" class="nav-item nav-link">Faculty</a>
                 <a href="/adminaccount" class="nav-item nav-link active">Accounts</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
@@ -417,11 +418,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <form action="/sonogram" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/faculty" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <center>
                                 <div class="form-group">
-                                    <input required type="text" name="petName" id=""
+                                    <input required type="text" name="facultyName" id=""
                                         placeholder="Pet Name" class="form-control">
                                 </div>
                                 <div class="form-group" style="margin-top: 10px;">

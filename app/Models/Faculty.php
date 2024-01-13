@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sonogram extends Model
+class Faculty extends Model
 {
     use HasFactory;
 
-    protected $id = 'sonogramID';
-    protected $table = 'sonograms';
+    protected $id = 'facultyID';
+    protected $table = 'faculty';
 
     protected $fillable = [
-        'sonogramID',
-        'userID',
-        'petName',
+        'facultyID',
+        'facultyName',
         "imagePath",
         "status",
         "approver",

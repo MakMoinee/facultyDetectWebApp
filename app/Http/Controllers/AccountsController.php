@@ -121,7 +121,7 @@ class AccountsController extends Controller
                         } catch (Exception $e1) {
                         }
 
-                        $results = Results::where('sonogramID', '=', $s['sonogramID'])->get();
+                        $results = Results::where('facultyID', '=', $s['facultyID'])->get();
 
                         foreach ($results as $r) {
                             try {
@@ -132,9 +132,9 @@ class AccountsController extends Controller
                                 }
                             } catch (Exception $e1) {
                             }
-                            $isDeleteResult = DB::table("results")->where('sonogramID', '=', $s['sonogramID'])->delete();
+                            $isDeleteResult = DB::table("results")->where('facultyID', '=', $s['facultyID'])->delete();
                         }
-                        $isDeleteResult = DB::table("sonograms")->where('sonogramID', '=', $s['sonogramID'])->delete();
+                        $isDeleteResult = DB::table("sonograms")->where('facultyID', '=', $s['facultyID'])->delete();
                     }
                 }
 

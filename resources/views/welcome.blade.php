@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
+    <link rel="icon" href="/img/student.png" type="image/x-icon">
     <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="FacultyScan" name="keywords">
@@ -79,7 +79,7 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <h1 class="m-0 text-primary"><img src="/img/student.png" width="46px" height="46px" alt=""
-                    srcset=""></i>FacultyScan</h1>
+                    srcset="">FacultyScan</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
+    <link rel="icon" href="/img/student.png" type="image/x-icon">
     <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="FacultyScan" name="keywords">
@@ -80,7 +80,8 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-paw me-2"></i>FacultyScan</h1>
+            <h1 class="m-0 text-primary"><img src="/img/student.png" width="46px" height="46px" alt=""
+                    srcset="">FacultyScan</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -110,7 +111,7 @@
                     <h3 class="display-12 mb-0">Pet Owner: </h3>
                     <h4 class="text-body fst mb-4">{{ $results['fullName'] }}</h4>
                     <h3 class="display-12 mb-0">Pet Name: </h3>
-                    <h4 class="text-body fst mb-4">{{ $results['petName'] }}</h4>
+                    <h4 class="text-body fst mb-4">{{ $results['facultyName'] }}</h4>
                     <h3 class="display-12 mb-0">ToDos: </h3>
                     <h6 class="text-body fst mb-4">
                         @foreach ($todo as $item)
@@ -167,7 +168,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-light mb-2" href="/userdashboard"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                        <a class="text-light" href="/sonogram"><i
+                        <a class="text-light" href="/faculty"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Sonogram</a>
                         <a class="text-light" href="/account"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Account</a>
@@ -314,11 +315,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <form action="/sonogram" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/faculty" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <center>
                                 <div class="form-group">
-                                    <input required type="text" name="petName" id=""
+                                    <input required type="text" name="facultyName" id=""
                                         placeholder="Pet Name" class="form-control">
                                 </div>
                                 <div class="form-group" style="margin-top: 10px;">

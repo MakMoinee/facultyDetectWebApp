@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="/img/pawlogo.png" type="image/x-icon">
+    <link rel="icon" href="/img/student.png" type="image/x-icon">
     <title>FacultyScan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="FacultyScan" name="keywords">
@@ -78,7 +78,8 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-paw me-2"></i>FacultyScan</h1>
+            <h1 class="m-0 text-primary"><img src="/img/student.png" width="46px" height="46px" alt=""
+                    srcset="">FacultyScan</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -86,7 +87,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/userdashboard" class="nav-item nav-link active">Home</a>
-                <a href="/sonogram" class="nav-item nav-link">Sonogram</a>
+                <a href="/faculty" class="nav-item nav-link">Faculty</a>
                 <a href="/account" class="nav-item nav-link">Account</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
@@ -106,23 +107,25 @@
                 <div class="col-lg-7">
                     <div class="section-title mb-4">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>
-                        <h1 class="display-5 mb-0">FacultyScan - Your Trusted Sonogram Analysis Partner</h1>
+                        <h1 class="display-5 mb-0">FacultyScan – Effortless Faculty Presence Monitoring Made Simple
+                        </h1>
                     </div>
-                    <h4 class="text-body fst-italic mb-4">At FacultyScan, we are passionate about providing reliable and
-                        accurate sonogram scanning services for Shi Tzus. As a leading web application, we specialize in
-                        analyzing sonogram images uploaded by users to provide valuable insights into the health and
-                        condition of their furry companions' Shi Tzu.</h4>
+                    <h4 class="text-body fst-italic mb-4">FacultyScan
+                        employs cutting-edge AI technology to automatically detect faculty presence in designated rooms.
+                        Say goodbye to manual processes and embrace the efficiency of our smart solution for seamless
+                        and accurate attendance management in the academic landscape."</h4>
                     <div class="row g-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>24/7 Opened</h5>
+                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>24/7 Open</h5>
                             {{-- <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Fair Prices</h5> --}}
                         </div>
+                        <br>
                     </div>
                 </div>
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="img/about.jpg" style="object-fit: cover;">
+                            src="img/student.png" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -141,7 +144,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-light mb-2" href="/userdashboard"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                        <a class="text-light" href="/sonogram"><i
+                        <a class="text-light" href="/faculty"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Sonogram</a>
                         <a class="text-light" href="/account"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Account</a>

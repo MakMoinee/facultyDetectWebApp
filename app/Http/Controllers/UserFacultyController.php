@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sonogram;
+use App\Models\Faculty;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class UserSonogramController extends Controller
+class UserFacultyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,9 @@ class UserSonogramController extends Controller
             $mUser = session()->pull("users");
             session()->put("users", $mUser);
             $userID = $mUser[0]['userID'];
-            $queryResult = DB::table("sonograms")->where("userID", $userID)->get();
-            $sonograms = json_decode($queryResult,true);
-            return view("user.sonogram", ['sonograms' => $sonograms]);
+            $queryResult = DB::table("faculty")->where("facultyID", $userID)->get();
+            $sonograms = json_decode($queryResult, true);
+            return view("user.faculty", ['sonograms' => $sonograms]);
         } else {
             return redirect("/");
         }
@@ -44,24 +44,24 @@ class UserSonogramController extends Controller
             $mUser = session()->pull("users");
             session()->put("users", $mUser);
             $userID = $mUser[0]['userID'];
+            $userType = $mUser[0]['userType'];
 
             $files = $request->file("files");
             $fileName = "";
-            $petName = $request->petName;
+            $facultyName = $request->facultyName;
 
             if ($files) {
                 $mimeType = $files->getMimeType();
                 if ($mimeType == "image/png" || $mimeType == "image/jpg" || $mimeType == "image/JPG" || $mimeType == "image/JPEG" || $mimeType == "image/jpeg" || $mimeType == "image/PNG") {
-                    $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/data/sonograms';
+                    $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/data/faculty';
                     $fileName = strtotime(now()) . "." . $files->getClientOriginalExtension();
                     $isFile = $files->move($destinationPath,  $fileName);
                     chmod($destinationPath, 0755);
 
                     if ($fileName != "") {
-                        $fileName = "/data/sonograms/" . $fileName;
-                        $sonogram = new Sonogram();
-                        $sonogram->petName = $petName;
-                        $sonogram->userID = $userID;
+                        $fileName = "/data/faculty/" . $fileName;
+                        $sonogram = new Faculty();
+                        $sonogram->facultyName = $facultyName;
                         $sonogram->imagePath = $fileName;
                         $sonogram->status = "In Progress";
                         $isSave = $sonogram->save();
@@ -79,8 +79,10 @@ class UserSonogramController extends Controller
             } else {
                 session()->put("errorFileEmpty", true);
             }
-
-            return redirect("/sonogram");
+            if ($userType == 1) {
+                return redirect("/adminsono");
+            }
+            return redirect("/faculty");
         } else {
             return redirect("/");
         }
@@ -127,7 +129,7 @@ class UserSonogramController extends Controller
                 } catch (Exception $e1) {
                 }
 
-                $isDelete = DB::table('sonograms')->where('sonogramID', '=', $id)->delete();
+                $isDelete = DB::table('sonograms')->where('facultyID', '=', $id)->delete();
                 if ($isDelete) {
                     session()->put("successDeleteSonogram", true);
                 } else {
@@ -135,7 +137,7 @@ class UserSonogramController extends Controller
                 }
             }
 
-            return redirect("/sonogram");
+            return redirect("/faculty");
         } else {
             return redirect("/");
         }

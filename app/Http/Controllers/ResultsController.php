@@ -75,7 +75,7 @@ class ResultsController extends Controller
             $id = $request->query("id");
             if ($id) {
 
-                $queryResult = DB::table("vwresults")->where("sonogramID", $id)->get();
+                $queryResult = DB::table("vwresults")->where("facultyID", $id)->get();
                 $results = json_decode($queryResult, true);
                 $todo = $this->getToDos($results[0]['pregnancyStage']);
                 $todoArr = explode("-", $todo);

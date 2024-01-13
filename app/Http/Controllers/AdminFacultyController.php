@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class AdminSonogramController extends Controller
+class AdminFacultyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +27,9 @@ class AdminSonogramController extends Controller
             if ($userType != 1) {
                 return redirect("/");
             }
-            $queryResult = DB::table("vwsonograms")->get();
-            $sonograms = json_decode($queryResult, true);
-            return view("admin.sonogram", ['sonograms' => $sonograms]);
+            $queryResult = DB::table("faculty")->get();
+            $faculty = json_decode($queryResult, true);
+            return view("admin.faculty", ['faculty' => $faculty]);
         } else {
             return redirect("/");
         }
@@ -81,8 +81,8 @@ class AdminSonogramController extends Controller
                 return redirect("/");
             }
             if (isset($request->btnAcceptSonogram)) {
-                $affectedRows = DB::table("sonograms")
-                    ->where("sonogramID", $id)
+                $affectedRows = DB::table("faculty")
+                    ->where("facultyID", $id)
                     ->update([
                         "status" => "Successful",
                         "remarks" => "See Results",
@@ -90,20 +90,20 @@ class AdminSonogramController extends Controller
                     ]);
                 if ($affectedRows > 0) {
                     session()->put("successUpdate", true);
-                    $queryResult = DB::table("sonograms")->where('sonogramID', $id)->get();
+                    $queryResult = DB::table("sonograms")->where('facultyID', $id)->get();
                     $data = json_decode($queryResult, true);
 
                     $this->callApi($id, $data[0]['imagePath']);
 
                     // $generatedResult = $this->getDetails(rand(1, 3));
-                    // $generatedResult->sonogramID = $id;
+                    // $generatedResult->facultyID = $id;
                     // $isSave = $generatedResult->save();
                     // if ($isSave) {
                     //     session()->put("successUpdate", true);
                     //     $this->callApi($id);
                     // } else {
                     //     $affectedRows = DB::table("sonograms")
-                    //         ->where("sonogramID", $id)
+                    //         ->where("facultyID", $id)
                     //         ->update([
                     //             "status" => "In Progress",
                     //             "remarks" => ""
@@ -135,8 +135,8 @@ class AdminSonogramController extends Controller
             }
 
             if (isset($request->btnDeclineSonogram)) {
-                $affectedRows = DB::table("sonograms")
-                    ->where("sonogramID", $id)
+                $affectedRows = DB::table("faculty")
+                    ->where("facultyID", $id)
                     ->update([
                         "status" => "Decline",
                         "remarks" => $request->remarks
@@ -149,7 +149,7 @@ class AdminSonogramController extends Controller
                 }
             } else if (isset($request->btnDeleteSonogram)) {
 
-                $queryResult = DB::table('results')->where('sonogramID', $id)->get();
+                $queryResult = DB::table('results')->where('facultyID', $id)->get();
                 $data = json_decode($queryResult, true);
                 foreach ($data as $d) {
                     try {
@@ -161,7 +161,7 @@ class AdminSonogramController extends Controller
                     } catch (Exception $e1) {
                     }
 
-                    $isDelete = DB::table('results')->where('sonogramID', '=', $id)->delete();
+                    $isDelete = DB::table('results')->where('facultyID', '=', $id)->delete();
                 }
 
                 try {
@@ -173,7 +173,7 @@ class AdminSonogramController extends Controller
                 } catch (Exception $e1) {
                 }
 
-                $isDelete = DB::table('sonograms')->where('sonogramID', '=', $id)->delete();
+                $isDelete = DB::table('faculty')->where('facultyID', '=', $id)->delete();
                 if ($isDelete) {
                     session()->put("successAdminDeleteSonogram", true);
                 } else {
