@@ -161,13 +161,10 @@
                                     </th>
                                     <th>Faculty Name</th>
                                     <th class="text-center">Date Detected</th>
-                                    <th>Device IP</th>
-                                    <th class="text-center">Remarks</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                
                             </tbody>
                         </table>
                     </div>

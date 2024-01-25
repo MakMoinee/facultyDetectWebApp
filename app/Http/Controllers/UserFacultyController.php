@@ -19,7 +19,7 @@ class UserFacultyController extends Controller
             $mUser = session()->pull("users");
             session()->put("users", $mUser);
             $userID = $mUser[0]['userID'];
-            $queryResult = DB::table("faculty")->where("facultyID", $userID)->get();
+            $queryResult = DB::table("results")->where("facultyID", 1)->get();
             $sonograms = json_decode($queryResult, true);
             return view("user.faculty", ['sonograms' => $sonograms]);
         } else {

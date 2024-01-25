@@ -458,7 +458,7 @@
     </div>
     <div class="modal fade " id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadModalLabel">Add Faculty</h5>
@@ -467,41 +467,49 @@
                     <div class="row">
                         <form action="/faculty" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
-                            <center>
-                                <div class="form-group">
-                                    <input required type="text" name="facultyName" id=""
-                                        placeholder="Faculty Name" class="form-control">
-                                </div>
-                                <div class="form-group" style="margin-top: 10px;">
-                                    <button class="file-upload-btn" type="button"
-                                        onclick="$('.file-upload-input').trigger( 'click' )">Add
-                                        Image</button>
+                            <div class="form-group">
+                                <input required type="text" name="facultyName" id=""
+                                    placeholder="Faculty Name" class="form-control">
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <label for="raw" class="text-left">Raw Files:</label>
+                                <input type="file" class="form-control" name="raw" id=""
+                                    placeholder="Raw Files" accept="*.zip">
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <label for="raw" class="text-left">Trained Model:</label>
+                                <input required type="file" class="form-control" name="raw" id=""
+                                    placeholder="Raw Files" accept="*.zip">
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <button class="file-upload-btn" type="button"
+                                    onclick="$('.file-upload-input').trigger( 'click' )">Add
+                                    Image</button>
 
-                                    <div class="image-upload-wrap">
-                                        <input required class="file-upload-input" name="files" type='file'
-                                            onchange="readURL(this);" accept="image/*" />
-                                        <div class="drag-text">
-                                            <h3>Drag and drop a file or select add Image</h3>
-                                        </div>
+                                <div class="image-upload-wrap">
+                                    <input required class="file-upload-input" name="files" type='file'
+                                        onchange="readURL(this);" accept="image/*" />
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
                                     </div>
-                                    <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image"
-                                            width="100%" height="40%" />
-                                        <div class="image-title-wrap">
-                                            <button type="button" onclick="removeUpload()"
-                                                class="remove-image">Remove <span class="image-title">Uploaded
-                                                    Image</span></button>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div>
-                                        <p><b>Important Note:</b> To ensure accurate results,
-                                            we
-                                            recommend to use actual picture of faculty</p>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" width="100%"
+                                        height="40%" />
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
+                                            <span class="image-title">Uploaded
+                                                Image</span></button>
                                     </div>
                                 </div>
                                 <br>
-                            </center>
+                                <div>
+                                    <p><b>Important Note:</b> To ensure accurate results,
+                                        we
+                                        recommend to use actual picture of faculty</p>
+                                </div>
+                            </div>
+                            <br>
 
                     </div>
                 </div>
