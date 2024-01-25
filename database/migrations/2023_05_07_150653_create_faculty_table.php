@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('facultyID')->autoIncrement();
             $table->string('facultyName');
             $table->string('imagePath');
+            $table->string('modelPath');
             $table->string('status');
             $table->string('remarks')->nullable(true);
             $table->timestamps();

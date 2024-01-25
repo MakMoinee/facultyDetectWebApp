@@ -107,8 +107,7 @@
             <div class="row g-5">
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
-                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance
-                            Analysis</h5>
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Records</h5>
                         <h1 class="display-5 mb-0">Faculty Table</h1>
                     </div>
                     <div class="section-body mb-2">
@@ -472,14 +471,9 @@
                                     placeholder="Faculty Name" class="form-control">
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
-                                <label for="raw" class="text-left">Raw Files:</label>
-                                <input type="file" class="form-control" name="raw" id=""
-                                    placeholder="Raw Files" accept="*.zip">
-                            </div>
-                            <div class="form-group" style="margin-top: 10px;">
                                 <label for="raw" class="text-left">Trained Model:</label>
-                                <input required type="file" class="form-control" name="raw" id=""
-                                    placeholder="Raw Files" accept="*.zip">
+                                <input required type="file" class="form-control" name="pt" id=""
+                                    placeholder="Trained Model" accept="*.pt">
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
                                 <button class="file-upload-btn" type="button"
@@ -495,7 +489,7 @@
                                 </div>
                                 <div class="file-upload-content">
                                     <img class="file-upload-image" src="#" alt="your image" width="100%"
-                                        height="40%" />
+                                        height="30%" />
                                     <div class="image-title-wrap">
                                         <button type="button" onclick="removeUpload()" class="remove-image">Remove
                                             <span class="image-title">Uploaded
@@ -633,6 +627,20 @@
         {{ session()->forget('errorcUpdate') }}
     @endif
 
+    @if (session()->pull('errorAddFaculty'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Failed to add Faculty, Please try again later',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>
+        {{ session()->forget('errorAddFaculty') }}
+    @endif
     @if (session()->pull('errorcDecline'))
         <script>
             setTimeout(() => {
@@ -691,6 +699,21 @@
             }, 500);
         </script>
         {{ session()->forget('successAdminDeleteSonogram') }}
+    @endif
+
+    @if (session()->pull('successAddFaculty'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully Added Faculty',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>
+        {{ session()->forget('successAddFaculty') }}
     @endif
 
     @if (session()->pull('errorAdminDeleteSonogram'))

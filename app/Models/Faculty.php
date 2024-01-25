@@ -17,6 +17,7 @@ class Faculty extends Model
         'facultyName',
         "imagePath",
         "status",
+        "modelPath",
         "approver",
     ];
 }

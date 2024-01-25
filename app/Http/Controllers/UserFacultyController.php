@@ -40,6 +40,7 @@ class UserFacultyController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         if (session()->exists("users")) {
             $mUser = session()->pull("users");
             session()->put("users", $mUser);
@@ -50,25 +51,46 @@ class UserFacultyController extends Controller
             $fileName = "";
             $facultyName = $request->facultyName;
 
-            if ($files) {
+            $ptFile = $request->file("pt");
+            $ptFileName = "";
+
+            if ($files && $ptFile) {
                 $mimeType = $files->getMimeType();
-                if ($mimeType == "image/png" || $mimeType == "image/jpg" || $mimeType == "image/JPG" || $mimeType == "image/JPEG" || $mimeType == "image/jpeg" || $mimeType == "image/PNG") {
+                $ptMimeType = $ptFile->getMimeType();
+                if (
+                    $mimeType == "image/png" ||
+                    $mimeType == "image/jpg" ||
+                    $mimeType == "image/JPG" ||
+                    $mimeType == "image/JPEG" ||
+                    $mimeType == "image/jpeg" ||
+                    $mimeType == "image/PNG" &&
+                    $ptMimeType == "application/octet-stream"
+                ) {
                     $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/data/faculty';
                     $fileName = strtotime(now()) . "." . $files->getClientOriginalExtension();
                     $isFile = $files->move($destinationPath,  $fileName);
                     chmod($destinationPath, 0755);
 
                     if ($fileName != "") {
-                        $fileName = "/data/faculty/" . $fileName;
-                        $sonogram = new Faculty();
-                        $sonogram->facultyName = $facultyName;
-                        $sonogram->imagePath = $fileName;
-                        $sonogram->status = "In Progress";
-                        $isSave = $sonogram->save();
-                        if ($isSave) {
-                            session()->put("successAddSonogram", true);
-                        } else {
-                            session()->put("errorAddSonogram", true);
+
+                        $destinationPath2 = $_SERVER['DOCUMENT_ROOT'] . '/data/weights';
+                        $ptFileName = strtotime(now()) . "." . $ptFile->getClientOriginalExtension();
+                        $isFile2 = $ptFile->move($destinationPath2,  $ptFileName);
+                        chmod($destinationPath2, 0755);
+
+                        if ($isFile2) {
+                            $fileName = "/data/faculty/" . $fileName;
+                            $sonogram = new Faculty();
+                            $sonogram->facultyName = $facultyName;
+                            $sonogram->imagePath = $fileName;
+                            $sonogram->status = "";
+                            $sonogram->modelPath = "/data/weights/" . $ptFileName;
+                            $isSave = $sonogram->save();
+                            if ($isSave) {
+                                session()->put("successAddFaculty", true);
+                            } else {
+                                session()->put("errorAddFaculty", true);
+                            }
                         }
                     } else {
                         session()->put("errorAddSonogram", true);
