@@ -274,6 +274,8 @@
                                                                                 Faculty Record?</h4>
                                                                             <input type="hidden" name="origImagePath"
                                                                                 value="{{ $item['imagePath'] }}">
+                                                                            <input type="hidden" name="origModelPath"
+                                                                                value="{{ $item['modelPath'] }}">
                                                                         </div>
                                                                     </center>
                                                             </div>

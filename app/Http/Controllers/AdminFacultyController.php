@@ -173,6 +173,17 @@ class AdminFacultyController extends Controller
                 } catch (Exception $e1) {
                 }
 
+                
+                try {
+                    $origModelPath = $request->origModelPath;
+                    if ($origModelPath) {
+                        $destinationPath2 = $_SERVER['DOCUMENT_ROOT'] . $origModelPath;
+                        File::delete($destinationPath2);
+                    }
+                } catch (Exception $e1) {
+                }
+
+
                 $isDelete = DB::table('faculty')->where('facultyID', '=', $id)->delete();
                 if ($isDelete) {
                     session()->put("successAdminDeleteSonogram", true);
