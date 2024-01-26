@@ -107,7 +107,8 @@
             <div class="row g-5">
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
-                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance Analysis</h5>
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance
+                            Analysis</h5>
                         <h1 class="display-5 mb-0">Faculty Table</h1>
                     </div>
                     <div class="section-body mb-2">
@@ -161,10 +162,31 @@
                                     </th>
                                     <th>Faculty Name</th>
                                     <th class="text-center">Date Detected</th>
+                                    <th>Picture</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach ($detections as $item)
+                                    <tr>
+                                        <td class="text-center">
+
+                                        </td>
+                                        <td>
+                                            {{ $item['facultyName'] }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $item['detectedDate'] }}
+                                        </td>
+                                        <td>
+                                            @if ($item['imagePath'])
+                                                <a href="{{ $item['imagePath'] }}" target="_blank">
+                                                    <img src="{{ $item['imagePath'] }}" width="46px" height="56px"
+                                                        alt="" srcset="">
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -233,7 +255,7 @@
                     <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="/">FacultyScan</a>.
                         All Rights Reserved.</p>
                 </div>
-                
+
             </div>
         </div>
     </div>
