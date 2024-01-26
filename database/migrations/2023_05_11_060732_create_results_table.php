@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id("resultID");
             $table->integer("facultyID");
             $table->date("detectedDate");
+            $table->string("name");
             $table->string("imagePath");
             $table->string("status");
             $table->timestamps();

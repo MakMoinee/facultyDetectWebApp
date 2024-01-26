@@ -172,7 +172,7 @@
 
                                         </td>
                                         <td>
-                                            {{ $item['facultyName'] }}
+                                            {{ $item['name'] }}
                                         </td>
                                         <td class="text-center">
                                             {{ $item['detectedDate'] }}

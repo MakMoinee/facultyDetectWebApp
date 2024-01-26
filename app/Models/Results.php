@@ -15,11 +15,10 @@ class Results extends Model
     protected $fillable = [
         'resultID',
         'facultyID',
-        "age",
-        "pregnancyStage",
-        "numberOfFetus",
-        'healthStatus',
         'imagePath',
+        'detectedDate',
+        'name',
+        'status',
         "created_at"
     ];
 }

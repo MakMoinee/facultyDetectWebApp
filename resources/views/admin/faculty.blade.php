@@ -475,7 +475,7 @@
                             <div class="form-group" style="margin-top: 10px;">
                                 <label for="raw" class="text-left">Trained Model:</label>
                                 <input required type="file" class="form-control" name="pt" id=""
-                                    placeholder="Trained Model" accept="*.pt">
+                                    placeholder="Trained Model" accept=".pt">
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
                                 <button class="file-upload-btn" type="button"
