@@ -3,15 +3,15 @@
 
  Source Server         : Local
  Source Server Type    : MySQL
- Source Server Version : 80030 (8.0.30)
+ Source Server Version : 80027
  Source Host           : localhost:3306
  Source Schema         : facultydetect
 
  Target Server Type    : MySQL
- Target Server Version : 80030 (8.0.30)
+ Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 27/01/2024 02:16:25
+ Date: 27/01/2024 04:33:30
 */
 
 SET NAMES utf8mb4;
@@ -36,7 +36,8 @@ CREATE TABLE `faculty`  (
 -- ----------------------------
 -- Records of faculty
 -- ----------------------------
-INSERT INTO `faculty` VALUES (5, 'Juliuz Pontano', '/data/faculty/1706225780.jpg', '/data/weights/1706225780.pt', '', NULL, '2024-01-25 23:36:20', '2024-01-25 23:36:20');
+INSERT INTO `faculty` VALUES (4, 'Juliuz Condez Portoza', '/data/faculty/1706300240.jpg', '/data/weights/1706300240.pt', '', NULL, '2024-01-26 20:17:20', '2024-01-26 20:17:20');
+INSERT INTO `faculty` VALUES (5, 'Kennen Borbon', '/data/faculty/1706300391.jpg', '/data/weights/1706300391.pt', '', NULL, '2024-01-26 20:19:51', '2024-01-26 20:19:51');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -67,7 +68,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -127,6 +128,7 @@ CREATE TABLE `results`  (
   `resultID` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `facultyID` int NOT NULL,
   `detectedDate` date NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `imagePath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -137,7 +139,7 @@ CREATE TABLE `results`  (
 -- ----------------------------
 -- Records of results
 -- ----------------------------
-INSERT INTO `results` VALUES (1, 5, '2024-01-26', '/data/faculty/1706225780.jpg', 'Unread', '2024-01-26 07:16:50', '2024-01-26 07:16:52');
+INSERT INTO `results` VALUES (1, 1, '2024-01-27', 'kennen borbon', './results/detected_20240127042037.jpg', 'faculty detected', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for susers
@@ -162,8 +164,8 @@ CREATE TABLE `susers`  (
 -- ----------------------------
 -- Records of susers
 -- ----------------------------
-INSERT INTO `susers` VALUES (1, 'Administrator', 'X', 'Administrator', 'default', '1998-01-01', '', 'admin@default.com', '$2y$10$BcTsPpWvfw3xxWKqcoMwZ.FFCbNEaVpJAD9AonbMRlmt628aKLoLm', 1, '2024-01-25 16:37:54', '2024-01-25 16:37:54');
-INSERT INTO `susers` VALUES (2, 'John', 'X', 'Doe', 'sample', '2000-12-12', '09090464388', 'sample@gmail.com', '$2y$10$aUvKZtyFUflvuzlQrquH4uPANYLXg40UVJzL98/tm9gJDVRZYLJQm', 2, '2024-01-25 23:17:34', '2024-01-25 23:17:34');
+INSERT INTO `susers` VALUES (1, 'Administrator', 'X', 'Administrator', 'default', '1998-01-01', '', 'admin@default.com', '$2y$10$d6brqWFbCVPuEkRfDOrimOheDeBJbxNPRcvC7y4.gAPBpZPYOv1PS', 1, '2024-01-26 20:05:05', '2024-01-26 20:05:05');
+INSERT INTO `susers` VALUES (2, 'John', 'X', 'Doe', 'sample', '1888-12-22', '09090464399', 'sample@gmail.com', '$2y$10$.XNcobSRkXr87u6cFqLzgu6QRDl.oL7NlKSn9x6nxHL00AEhis8nS', 2, '2024-01-26 20:21:36', '2024-01-26 20:21:36');
 
 -- ----------------------------
 -- Table structure for users
@@ -190,6 +192,6 @@ CREATE TABLE `users`  (
 -- View structure for vwresults
 -- ----------------------------
 DROP VIEW IF EXISTS `vwresults`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwresults` AS select `results`.`resultID` AS `resultID`,`results`.`facultyID` AS `facultyID`,`faculty`.`facultyName` AS `facultyName`,`results`.`detectedDate` AS `detectedDate`,`results`.`imagePath` AS `imagePath`,`results`.`status` AS `status`,`results`.`created_at` AS `created_at` from (`faculty` join `results` on((`faculty`.`facultyID` = `results`.`facultyID`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwresults` AS select `results`.`resultID` AS `resultID`,`results`.`detectedDate` AS `detectedDate`,`results`.`name` AS `name`,`results`.`imagePath` AS `imagePath`,`results`.`status` AS `status`,`results`.`created_at` AS `created_at`,`results`.`updated_at` AS `updated_at` from `results`;
 
 SET FOREIGN_KEY_CHECKS = 1;
