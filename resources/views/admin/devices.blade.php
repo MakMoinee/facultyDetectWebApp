@@ -112,11 +112,21 @@
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Device Records</h5>
                         <h1 class="display-5 mb-0">Devices Table</h1>
                     </div>
-
                     <div class="section-body mb-2">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDeviceModal">Add
                             Device</button>
+                        <br>
+                        <br>
+                        <form action="/admin_devices" method="get" autocomplete="off">
+                            <div class="form-group">
+                                <input type="search" class="form-control" placeholder="Search Room Name"
+                                    name="search" style="width:80%;float:left" value="{{ $searchKey }}">
+                                <button class="btn btn-primary" style="width:20%;float:left">Search</button>
+                            </div>
+                        </form>
                     </div>
+                </div>
+                <div class="col-lg-12">
                     <div class="table-responsive mb-5">
                         <table class="table border mb-0" id="sortTable">
                             <thead class="table-light fw-semibold">
@@ -165,11 +175,137 @@
                                     <th>Room</th>
                                     <th class="text-center">IP</th>
                                     <th>Date Registered</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($devices as $item)
+                                    <tr>
+                                        <td class="text-center">
 
+                                        </td>
+                                        <td>
+                                            {{ $item['room'] }}
+                                        </td>
+                                        <td class="text-center">
+
+                                            {{ $item['ip'] }}
+
+                                        </td>
+                                        <td>
+                                            {{ $item['created_at'] }}
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($item['status'] == 'Inactive')
+                                                <span class="text-danger">{{ $item['status'] }}</span>
+                                            @else
+                                                <span class="text-success">{{ $item['status'] }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($item['status'] == 'Inactive')
+                                                <button class="btn btn-warning">Activate</button>
+                                            @else
+                                                <button class="btn btn-warning">Deactivate</button>
+                                            @endif
+                                            <button class="btn btn-success"
+                                                data-bs-target="#editDeviceModal{{ $item['deviceID'] }}"
+                                                data-bs-toggle="modal">Edit</button>
+                                            <div class="modal fade " id="editDeviceModal{{ $item['deviceID'] }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}">
+                                                                Edit
+                                                                Device</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <form
+                                                                    action="{{ route('admin_devices.update', ['admin_device' => $item['deviceID']]) }}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    autocomplete="off">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <label for="room" class="text-left">Room
+                                                                            Name:</label>
+                                                                        <input required type="text" name="room"
+                                                                            id="" class="form-control"
+                                                                            value="{{ $item['room'] }}">
+                                                                    </div>
+                                                                    <div class="form-group" style="margin-top: 10px;">
+                                                                        <label for="raw"
+                                                                            class="text-left">IP:</label>
+                                                                        <input required type="text"
+                                                                            class="form-control" name="ip"
+                                                                            id=""
+                                                                            value="{{ $item['ip'] }}">
+                                                                    </div>
+                                                                    <br>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                name="btnUpdateDevice" value="yes">Proceed
+                                                                Updating</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger"
+                                                data-bs-target="#deleteDeviceModal{{ $item['deviceID'] }}"
+                                                data-bs-toggle="modal">Delete</button>
+                                            <div class="modal fade " id="deleteDeviceModal{{ $item['deviceID'] }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="deleteDeviceModalDeviceModalLabel{{ $item['deviceID'] }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="deleteDeviceModalDeviceModalLabel{{ $item['deviceID'] }}">
+                                                                Delete
+                                                                Device</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <form
+                                                                    action="{{ route('admin_devices.destroy', ['admin_device' => $item['deviceID']]) }}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    autocomplete="off">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <h4>Are You Want To Delete This Device?</h4>
+                                                                    </div>
+                                                                    <br>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                name="btnDeleteDevice" value="yes">Yes,
+                                                                proceed</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -265,71 +401,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <div class="modal fade " id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signUpModalLabel">Signup</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <form action="/signup" method="POST" enctype="multipart/form-data" autocomplete="off">
-                            @csrf
-                            <center>
-                                <div class="form-group">
-                                    <input required class="form-control" type="text" name="firstName"
-                                        id="fn" placeholder="First Name">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="middleName" id="mn"
-                                        placeholder="Middle Name">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="lastName" id="ln"
-                                        placeholder="Last Name">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <textarea required class="form-control" name="address" id="" cols="10" rows="3"
-                                        placeholder="Address"></textarea>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="birthDate" class="for"
-                                        style="float:left;margin-bottom: 10px;">Birth Date</label>
-                                    <input required type="date" name="birthDate" id=""
-                                        class="form-control">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <input required type="number" name="phoneNumber" id=""
-                                        class="form-control" placeholder="Phone Number">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <input required class="form-control" type="email" name="email"
-                                        id="un" placeholder="Email">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <input required class="form-control" type="password" name="password"
-                                        id="pw" placeholder="Password">
-                                </div>
-                            </center>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="btnSignup" value="yes">Signup</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="modal fade " id="addDeviceModal" tabindex="-1" role="dialog"
         aria-labelledby="addDeviceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
@@ -356,7 +427,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="btnLogin" value="yes">Proceed
+                    <button type="submit" class="btn btn-primary" name="btnAddDevice" value="yes">Proceed
                         Adding</button>
                 </div>
                 </form>
@@ -459,34 +530,34 @@
         {{ session()->forget('errorFileEmpty') }}
     @endif
 
-    @if (session()->pull('errorcUpdate'))
+    @if (session()->pull('errorUpdateDevice'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: 'Failed to accept Faculty, Please try again later',
+                    title: 'Failed To Update Device, Please try again later',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('errorcUpdate') }}
+        {{ session()->forget('errorUpdateDevice') }}
     @endif
 
-    @if (session()->pull('errorAddFaculty'))
+    @if (session()->pull('deviceFailedAdd'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Failed to add Faculty, Please try again later',
+                    title: 'Failed To Add Device, Please Try Again Later',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('errorAddFaculty') }}
+        {{ session()->forget('deviceFailedAdd') }}
     @endif
     @if (session()->pull('errorcDecline'))
         <script>
@@ -503,79 +574,79 @@
         {{ session()->forget('errorcDecline') }}
     @endif
 
-    @if (session()->pull('existEmail'))
+    @if (session()->pull('deviceExist'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
-                    icon: 'warning',
-                    title: 'Email Already Exist, Please Try Again With New Email',
+                    icon: 'error',
+                    title: 'Device With That IP Already Exist, Please Try Again With New IP',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('existEmail') }}
+        {{ session()->forget('deviceExist') }}
     @endif
 
-    @if (session()->pull('successUpdate'))
+    @if (session()->pull('successUpdateDevice'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Accepted Faculty',
+                    title: 'Successfully Updated Device Info',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successUpdate') }}
+        {{ session()->forget('successUpdateDevice') }}
     @endif
 
-    @if (session()->pull('successAdminDeleteSonogram'))
+    @if (session()->pull('successDeleteDevice'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Deleted Faculty',
+                    title: 'Successfully Deleted Device',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successAdminDeleteSonogram') }}
+        {{ session()->forget('successDeleteDevice') }}
     @endif
 
-    @if (session()->pull('successAddFaculty'))
+    @if (session()->pull('deviceAddSuccess'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Added Faculty',
+                    title: 'Successfully Added Device',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successAddFaculty') }}
+        {{ session()->forget('deviceAddSuccess') }}
     @endif
 
-    @if (session()->pull('errorAdminDeleteSonogram'))
+    @if (session()->pull('errorDeleteDevice'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
-                    icon: 'warning',
-                    title: 'Failed to delete Facultys',
+                    icon: 'error',
+                    title: 'Failed To Delete Device, Please Try Again Later',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('errorAdminDeleteSonogram') }}
+        {{ session()->forget('errorDeleteDevice') }}
     @endif
 
     @if (session()->pull('successDecline'))

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Devices;
 use App\Models\Results;
 use App\Models\Sonogram;
 use Exception;
@@ -29,7 +30,10 @@ class AdminFacultyController extends Controller
             }
             $queryResult = DB::table("faculty")->get();
             $faculty = json_decode($queryResult, true);
-            return view("admin.faculty", ['faculty' => $faculty]);
+
+            $devices = Devices::all();
+            $devices = json_decode($devices, true);
+            return view("admin.faculty", ['faculty' => $faculty, 'devices' => $devices]);
         } else {
             return redirect("/");
         }
@@ -173,7 +177,7 @@ class AdminFacultyController extends Controller
                 } catch (Exception $e1) {
                 }
 
-                
+
                 try {
                     $origModelPath = $request->origModelPath;
                     if ($origModelPath) {
