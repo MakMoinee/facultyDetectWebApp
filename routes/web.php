@@ -3,6 +3,8 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\AdminDashboard;
+use App\Http\Controllers\AdminDetectionsController;
+use App\Http\Controllers\AdminDevicesController;
 use App\Http\Controllers\AdminFacultyController;
 use App\Http\Controllers\CaptureController;
 use App\Http\Controllers\ContactController;
@@ -44,3 +46,6 @@ Route::resource("/results", ResultsController::class);
 Route::resource("/adminaccount", AccountsController::class);
 Route::resource('/account',UserAccountController::class);
 Route::resource('/capture',CaptureController::class);
+Route::get('/admin_detections',[AdminDetectionsController::class,'index']);
+Route::resource('/admin_devices',AdminDevicesController::class);
+

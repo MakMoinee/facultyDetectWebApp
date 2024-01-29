@@ -88,8 +88,8 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/admindashboard" class="nav-item nav-link">Home</a>
-                <a href="/adminsono" class="nav-item nav-link active">Faculty</a>
-                <a href="/admin_detections" class="nav-item nav-link">Detections</a>
+                <a href="/adminsono" class="nav-item nav-link ">Faculty</a>
+                <a href="/admin_detections" class="nav-item nav-link active">Detections</a>
                 <a href="/admin_devices" class="nav-item nav-link">Devices</a>
                 <a href="/adminaccount" class="nav-item nav-link">Accounts</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
@@ -109,9 +109,8 @@
             <div class="row g-5">
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
-                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty
-                            Records</h5>
-                        <h1 class="display-5 mb-0">Faculty Table</h1>
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance Records</h5>
+                        <h1 class="display-5 mb-0">Detections Table</h1>
                     </div>
                     <div class="section-body mb-2">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">Add
@@ -163,140 +162,29 @@
                                         </svg>
                                     </th>
                                     <th>Faculty Name</th>
-                                    <th class="text-center">Image</th>
-                                    <th>Date Registered</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Date Detected</th>
+                                    <th>Picture</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($faculty as $item)
-                                    <tr class="align-middle">
+                                @foreach ($detections as $item)
+                                    <tr>
                                         <td class="text-center">
 
                                         </td>
                                         <td>
-                                            {{ $item['facultyName'] }}
+                                            {{ $item['name'] }}
                                         </td>
                                         <td class="text-center">
-                                            <img src="{{ $item['imagePath'] }}" width="50px" height="50px"
-                                                alt="" srcset="">
+                                            {{ $item['detectedDate'] }}
                                         </td>
                                         <td>
-                                            {{ date('Y-m-d', strtotime($item['created_at'])) }}
-                                        </td>
-                                        <td class="text-center">
-                                            <button class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#viewModal{{ $item['facultyID'] }}">View</button>
-                                            <div class="modal fade " id="viewModal{{ $item['facultyID'] }}"
-                                                tabindex="-1" role="dialog"
-                                                aria-labelledby="viewModalLabel{{ $item['facultyID'] }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="viewModalLabel{{ $item['facultyID'] }}">
-                                                                View
-                                                                Faculty</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <form action="#" method="POST"
-                                                                    enctype="multipart/form-data" autocomplete="off">
-                                                                    @csrf
-                                                                    <center>
-                                                                        <div class="form-group">
-                                                                            <label for="facultyName"
-                                                                                style="float: left;">Pet
-                                                                                Name:</label>
-                                                                            <br>
-                                                                            <input readonly type="text"
-                                                                                name="facultyName" id=""
-                                                                                placeholder="Faculty Name"
-                                                                                class="form-control"
-                                                                                value="{{ $item['facultyName'] }}">
-                                                                        </div>
-                                                                        <br>
-                                                                        <div class="form-group">
-                                                                            <label for="sonogram"
-                                                                                style="float: left;">Uploaded
-                                                                                Faculty:</label>
-                                                                            <br>
-                                                                            <img style="margin-top: 10px"
-                                                                                src="{{ $item['imagePath'] }}"
-                                                                                alt="" srcset=""
-                                                                                class="form-control">
-                                                                        </div>
-                                                                        <br>
-                                                                        @if ($item['remarks'] != 'See Results')
-                                                                            <div class="form-group">
-                                                                                <label for="sonogram"
-                                                                                    style="float: left;">Remarks:</label>
-                                                                                <br>
-                                                                                <input readonly type="text"
-                                                                                    name="" id=""
-                                                                                    value="{{ $item['remarks'] }}"
-                                                                                    class="form-control">
-                                                                            </div>
-                                                                        @endif
-
-                                                                    </center>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteSonogramModalLabel{{ $item['facultyID'] }}">Delete</button>
-                                            <div class="modal fade "
-                                                id="deleteSonogramModalLabel{{ $item['facultyID'] }}" tabindex="-1"
-                                                role="dialog"
-                                                aria-labelledby="deleteSonogramModalLabel{{ $item['facultyID'] }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <form
-                                                                    action="{{ route('adminsono.destroy', ['adminsono' => $item['facultyID']]) }}"
-                                                                    method="POST" enctype="multipart/form-data"
-                                                                    autocomplete="off">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <center>
-                                                                        <div class="form-group">
-                                                                            <h4>Are You Sure You Want To Delete This
-                                                                                Faculty Record?</h4>
-                                                                            <input type="hidden" name="origImagePath"
-                                                                                value="{{ $item['imagePath'] }}">
-                                                                            <input type="hidden" name="origModelPath"
-                                                                                value="{{ $item['modelPath'] }}">
-                                                                        </div>
-                                                                    </center>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary"
-                                                                name="btnDeleteSonogram" value="yes">Yes,
-                                                                proceed</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
+                                            @if ($item['imagePath'])
+                                                <a href="{{ $item['imagePath'] }}" target="_blank">
+                                                    <img src="{{ $item['imagePath'] }}" width="46px" height="56px"
+                                                        alt="" srcset="">
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

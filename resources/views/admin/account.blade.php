@@ -89,6 +89,8 @@
             <div class="navbar-nav ms-auto py-0">
                 <a href="/admindashboard" class="nav-item nav-link">Home</a>
                 <a href="/adminsono" class="nav-item nav-link">Faculty</a>
+                <a href="/admin_detections" class="nav-item nav-link">Detections</a>
+                <a href="/admin_devices" class="nav-item nav-link">Devices</a>
                 <a href="/adminaccount" class="nav-item nav-link active">Accounts</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
@@ -272,7 +274,7 @@
                         <a class="text-light mb-2" href="/admindashboard"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Home</a>
                         <a class="text-light" href="/adminsono"><i
-                                class="bi bi-arrow-right text-primary me-2"></i>Sonogram</a>
+                                class="bi bi-arrow-right text-primary me-2"></i>Faculty</a>
                         <a class="text-light" href="/adminaccount"><i
                                 class="bi bi-arrow-right text-primary me-2"></i>Account</a>
                     </div>

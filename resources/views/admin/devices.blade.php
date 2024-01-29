@@ -88,9 +88,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/admindashboard" class="nav-item nav-link">Home</a>
-                <a href="/adminsono" class="nav-item nav-link active">Faculty</a>
+                <a href="/adminsono" class="nav-item nav-link ">Faculty</a>
                 <a href="/admin_detections" class="nav-item nav-link">Detections</a>
-                <a href="/admin_devices" class="nav-item nav-link">Devices</a>
+                <a href="/admin_devices" class="nav-item nav-link active">Devices</a>
                 <a href="/adminaccount" class="nav-item nav-link">Accounts</a>
                 {{-- <a href="/contact" class="nav-item nav-link">Contact</a> --}}
             </div>
@@ -109,13 +109,13 @@
             <div class="row g-5">
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
-                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty
-                            Records</h5>
-                        <h1 class="display-5 mb-0">Faculty Table</h1>
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Device Records</h5>
+                        <h1 class="display-5 mb-0">Devices Table</h1>
                     </div>
+
                     <div class="section-body mb-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">Add
-                            Faculty</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDeviceModal">Add
+                            Device</button>
                     </div>
                     <div class="table-responsive mb-5">
                         <table class="table border mb-0" id="sortTable">
@@ -162,144 +162,14 @@
                                                 d="M10,16.331h6.587a.5.5,0,0,0,0-1H10a.5.5,0,0,0,0,1Z" />
                                         </svg>
                                     </th>
-                                    <th>Faculty Name</th>
-                                    <th class="text-center">Image</th>
+                                    <th>Room</th>
+                                    <th class="text-center">IP</th>
                                     <th>Date Registered</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($faculty as $item)
-                                    <tr class="align-middle">
-                                        <td class="text-center">
 
-                                        </td>
-                                        <td>
-                                            {{ $item['facultyName'] }}
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ $item['imagePath'] }}" width="50px" height="50px"
-                                                alt="" srcset="">
-                                        </td>
-                                        <td>
-                                            {{ date('Y-m-d', strtotime($item['created_at'])) }}
-                                        </td>
-                                        <td class="text-center">
-                                            <button class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#viewModal{{ $item['facultyID'] }}">View</button>
-                                            <div class="modal fade " id="viewModal{{ $item['facultyID'] }}"
-                                                tabindex="-1" role="dialog"
-                                                aria-labelledby="viewModalLabel{{ $item['facultyID'] }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="viewModalLabel{{ $item['facultyID'] }}">
-                                                                View
-                                                                Faculty</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <form action="#" method="POST"
-                                                                    enctype="multipart/form-data" autocomplete="off">
-                                                                    @csrf
-                                                                    <center>
-                                                                        <div class="form-group">
-                                                                            <label for="facultyName"
-                                                                                style="float: left;">Pet
-                                                                                Name:</label>
-                                                                            <br>
-                                                                            <input readonly type="text"
-                                                                                name="facultyName" id=""
-                                                                                placeholder="Faculty Name"
-                                                                                class="form-control"
-                                                                                value="{{ $item['facultyName'] }}">
-                                                                        </div>
-                                                                        <br>
-                                                                        <div class="form-group">
-                                                                            <label for="sonogram"
-                                                                                style="float: left;">Uploaded
-                                                                                Faculty:</label>
-                                                                            <br>
-                                                                            <img style="margin-top: 10px"
-                                                                                src="{{ $item['imagePath'] }}"
-                                                                                alt="" srcset=""
-                                                                                class="form-control">
-                                                                        </div>
-                                                                        <br>
-                                                                        @if ($item['remarks'] != 'See Results')
-                                                                            <div class="form-group">
-                                                                                <label for="sonogram"
-                                                                                    style="float: left;">Remarks:</label>
-                                                                                <br>
-                                                                                <input readonly type="text"
-                                                                                    name="" id=""
-                                                                                    value="{{ $item['remarks'] }}"
-                                                                                    class="form-control">
-                                                                            </div>
-                                                                        @endif
-
-                                                                    </center>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteSonogramModalLabel{{ $item['facultyID'] }}">Delete</button>
-                                            <div class="modal fade "
-                                                id="deleteSonogramModalLabel{{ $item['facultyID'] }}" tabindex="-1"
-                                                role="dialog"
-                                                aria-labelledby="deleteSonogramModalLabel{{ $item['facultyID'] }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <form
-                                                                    action="{{ route('adminsono.destroy', ['adminsono' => $item['facultyID']]) }}"
-                                                                    method="POST" enctype="multipart/form-data"
-                                                                    autocomplete="off">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <center>
-                                                                        <div class="form-group">
-                                                                            <h4>Are You Sure You Want To Delete This
-                                                                                Faculty Record?</h4>
-                                                                            <input type="hidden" name="origImagePath"
-                                                                                value="{{ $item['imagePath'] }}">
-                                                                            <input type="hidden" name="origModelPath"
-                                                                                value="{{ $item['modelPath'] }}">
-                                                                        </div>
-                                                                    </center>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary"
-                                                                name="btnDeleteSonogram" value="yes">Yes,
-                                                                proceed</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -460,53 +330,25 @@
             </div>
         </div>
     </div>
-    <div class="modal fade " id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade " id="addDeviceModal" tabindex="-1" role="dialog"
+        aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Add Faculty</h5>
+                    <h5 class="modal-title" id="addDeviceModalLabel">Add Device</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <form action="/faculty" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/admin_devices" method="POST" enctype="multipart/form-data"
+                            autocomplete="off">
                             @csrf
                             <div class="form-group">
-                                <input required type="text" name="facultyName" id=""
-                                    placeholder="Faculty Name" class="form-control">
+                                <label for="room" class="text-left">Room Name:</label>
+                                <input required type="text" name="room" id="" class="form-control">
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
-                                <label for="raw" class="text-left">Trained Model:</label>
-                                <input required type="file" class="form-control" name="pt" id=""
-                                    placeholder="Trained Model" accept=".pt">
-                            </div>
-                            <div class="form-group" style="margin-top: 10px;">
-                                <button class="file-upload-btn" type="button"
-                                    onclick="$('.file-upload-input').trigger( 'click' )">Add
-                                    Image</button>
-
-                                <div class="image-upload-wrap">
-                                    <input required class="file-upload-input" name="files" type='file'
-                                        onchange="readURL(this);" accept="image/*" />
-                                    <div class="drag-text">
-                                        <h3>Drag and drop a file or select add Image</h3>
-                                    </div>
-                                </div>
-                                <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" width="100%"
-                                        height="30%" />
-                                    <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
-                                            <span class="image-title">Uploaded
-                                                Image</span></button>
-                                    </div>
-                                </div>
-                                <br>
-                                <div>
-                                    <p><b>Important Note:</b> To ensure accurate results,
-                                        we
-                                        recommend to use actual picture of faculty</p>
-                                </div>
+                                <label for="raw" class="text-left">IP:</label>
+                                <input required type="text" class="form-control" name="ip" id="">
                             </div>
                             <br>
 
@@ -515,7 +357,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" name="btnLogin" value="yes">Proceed
-                        Uploading</button>
+                        Adding</button>
                 </div>
                 </form>
             </div>

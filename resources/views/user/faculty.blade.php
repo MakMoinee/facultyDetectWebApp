@@ -108,7 +108,7 @@
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance
-                            Analysis</h5>
+                            Records</h5>
                         <h1 class="display-5 mb-0">Faculty Table</h1>
                     </div>
                     <div class="section-body mb-2">
