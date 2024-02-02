@@ -234,6 +234,8 @@
                                                                                 Device?</h3>
                                                                             <input type="hidden" name="room"
                                                                                 value="{{ $item['room'] }}">
+                                                                            <input type="hidden" name="ip"
+                                                                                value="{{ $item['ip'] }}">
                                                                         </div>
                                                                         <br>
 
@@ -699,7 +701,7 @@
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Activated Device',
+                    title: 'Successfully Send Request For Device Activation',
                     showConfirmButton: false,
                     timer: 800
                 });
