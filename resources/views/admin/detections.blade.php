@@ -109,13 +109,22 @@
             <div class="row g-5">
                 <div class="col-lg-12">
                     <div class="section-title mb-4">
-                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance Records</h5>
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Faculty Attendance
+                            Records</h5>
                         <h1 class="display-5 mb-0">Detections Table</h1>
                     </div>
                     <div class="section-body mb-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">Add
-                            Faculty</button>
+                        <form action="/admin_devices" method="get" autocomplete="off">
+                            <div class="form-group">
+                                <input type="search" class="form-control" placeholder="Search Faculty Name"
+                                    name="search" style="width:80%;float:left" value="{{ $searchKey }}">
+                                <button class="btn btn-primary" style="width:20%;float:left">Search</button>
+                            </div>
+                        </form>
                     </div>
+
+                </div>
+                <div class="col-lg-12">
                     <div class="table-responsive mb-5">
                         <table class="table border mb-0" id="sortTable">
                             <thead class="table-light fw-semibold">
@@ -162,8 +171,9 @@
                                         </svg>
                                     </th>
                                     <th>Faculty Name</th>
-                                    <th class="text-center">Date Detected</th>
+                                    <th class="text-center">Room</th>
                                     <th>Picture</th>
+                                    <th class="text-center">Date & Time Detected</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Devices;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDO;
@@ -12,7 +15,7 @@ class AdminDevicesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (session()->exists("users")) {
             $mUser = session()->pull("users");
@@ -22,11 +25,26 @@ class AdminDevicesController extends Controller
             if ($userType != 1) {
                 return redirect("/");
             }
-
+            $searchKey = $request->query('search');
             $devices = Devices::all();
             $devices = json_decode($devices, true);
+            $tmpDevices = array();
 
-            return view("admin.devices", ['devices' => $devices, 'searchKey' => '']);
+            foreach ($devices as $d) {
+                $dateTime = new DateTime($d['created_at'], new DateTimeZone('UTC'));
+                $dateTime->setTimezone(new DateTimeZone('Asia/Manila'));
+                $formattedDate = $dateTime->format('Y-m-d h:i A');
+                $d['created_at'] = $formattedDate;
+                if ($searchKey) {
+                    if (str_contains($searchKey, $d['room'])) {
+                        array_push($tmpDevices, $d);
+                    }
+                } else {
+                    array_push($tmpDevices, $d);
+                }
+            }
+
+            return view("admin.devices", ['devices' => $tmpDevices, 'searchKey' => $searchKey]);
         } else {
             return redirect("/");
         }
