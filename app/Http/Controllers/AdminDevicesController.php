@@ -147,6 +147,7 @@ class AdminDevicesController extends Controller
             } else if ($request->btnActivateDevice) {
                 $this->callApi($id, $request->ip, $request->room);
                 session()->put("successActivate", true);
+                sleep(3);
             }
             return redirect("/admin_devices");
         } else {
