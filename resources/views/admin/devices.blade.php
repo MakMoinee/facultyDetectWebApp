@@ -205,17 +205,20 @@
                                         </td>
                                         <td>
                                             @if ($item['status'] == 'Inactive')
-                                                <button class="btn btn-warning">Activate</button>
-                                                <div class="modal fade " id="editDeviceModal{{ $item['deviceID'] }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}"
+                                                <button class="btn btn-warning"
+                                                    data-bs-target="#activateDeviceModal{{ $item['deviceID'] }}"
+                                                    data-bs-toggle="modal">Activate</button>
+                                                <div class="modal fade "
+                                                    id="activateDeviceModal{{ $item['deviceID'] }}" tabindex="-1"
+                                                    role="dialog"
+                                                    aria-labelledby="activateDeviceModalDeviceModalLabel{{ $item['deviceID'] }}"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-md" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"
-                                                                    id="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}">
-                                                                    Edit
+                                                                    id="activateDeviceModalDeviceModalLabel{{ $item['deviceID'] }}">
+                                                                    Activate
                                                                     Device</h5>
                                                             </div>
                                                             <div class="modal-body">
