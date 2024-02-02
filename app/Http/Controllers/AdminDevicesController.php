@@ -6,6 +6,7 @@ use App\Models\Devices;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDO;
@@ -143,8 +144,11 @@ class AdminDevicesController extends Controller
                 } else {
                     session()->put('deviceNotExist', true);
                 }
-                return redirect("/admin_devices");
+            } else if ($request->btnActivateDevice) {
+                $this->callApi($request->room);
+                session()->put("successActivate", true);
             }
+            return redirect("/admin_devices");
         } else {
             return redirect("/");
         }
@@ -182,5 +186,15 @@ class AdminDevicesController extends Controller
         } else {
             return redirect("/");
         }
+    }
+
+    private function callApi(string $room): void
+    {
+        $client = new Client();
+        $response = $client->get('http://localhost:5000/start', [
+            'query' => [
+                'room' => $room,
+            ],
+        ]);
     }
 }

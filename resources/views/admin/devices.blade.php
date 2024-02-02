@@ -206,8 +206,49 @@
                                         <td>
                                             @if ($item['status'] == 'Inactive')
                                                 <button class="btn btn-warning">Activate</button>
+                                                <div class="modal fade " id="editDeviceModal{{ $item['deviceID'] }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-md" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="editDeviceModalDeviceModalLabel{{ $item['deviceID'] }}">
+                                                                    Edit
+                                                                    Device</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <form
+                                                                        action="{{ route('admin_devices.update', ['admin_device' => $item['deviceID']]) }}"
+                                                                        method="POST" enctype="multipart/form-data"
+                                                                        autocomplete="off">
+                                                                        @method('put')
+                                                                        @csrf
+                                                                        <div class="form-group">
+                                                                            <h3>Are You Sure You Want To Activate This
+                                                                                Device?</h3>
+                                                                            <input type="hidden" name="room"
+                                                                                value="{{ $item['room'] }}">
+                                                                        </div>
+                                                                        <br>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary"
+                                                                    name="btnActivateDevice" value="yes">Proceed
+                                                                    Activating</button>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @else
-                                                <button class="btn btn-warning">Deactivate</button>
+                                                <button class="btn btn-secondary" disabled>Activate</button>
                                             @endif
                                             <button class="btn btn-success"
                                                 data-bs-target="#editDeviceModal{{ $item['deviceID'] }}"
@@ -649,19 +690,19 @@
         {{ session()->forget('errorDeleteDevice') }}
     @endif
 
-    @if (session()->pull('successDecline'))
+    @if (session()->pull('successActivate'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Declined Faculty',
+                    title: 'Successfully Activated Device',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successDecline') }}
+        {{ session()->forget('successActivate') }}
     @endif
 </body>
 
