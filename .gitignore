@@ -19,3 +19,5 @@ yarn-error.log
 /.vscode
 public/results
 public/data/faculty
+public/data/weights
+public/data/weights2
