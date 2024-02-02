@@ -197,7 +197,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            {{ $item['detectedDate'] }}
+                                            {{ date('Y-m-d h:i A', strtotime($item['detectedDate'])) }}
                                         </td>
                                     </tr>
                                 @endforeach
