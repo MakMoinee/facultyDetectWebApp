@@ -145,7 +145,7 @@ class AdminDevicesController extends Controller
                     session()->put('deviceNotExist', true);
                 }
             } else if ($request->btnActivateDevice) {
-                $this->callApi($request->room);
+                $this->callApi($id, $request->room);
                 session()->put("successActivate", true);
             }
             return redirect("/admin_devices");
@@ -188,12 +188,13 @@ class AdminDevicesController extends Controller
         }
     }
 
-    private function callApi(string $room): void
+    private function callApi(string $id, string $room): void
     {
         $client = new Client();
         $response = $client->get('http://localhost:5000/start', [
             'query' => [
                 'room' => $room,
+                'id' => $id
             ],
         ]);
     }
