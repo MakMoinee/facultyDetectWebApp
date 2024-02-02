@@ -185,8 +185,8 @@
                                         <td>
                                             {{ $item['name'] }}
                                         </td>
-                                        <td class="text-center">
-                                            {{ $item['detectedDate'] }}
+                                        <td>
+                                            {{ $item['room'] }}
                                         </td>
                                         <td>
                                             @if ($item['imagePath'])
@@ -195,6 +195,9 @@
                                                         alt="" srcset="">
                                                 </a>
                                             @endif
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $item['detectedDate'] }}
                                         </td>
                                     </tr>
                                 @endforeach
