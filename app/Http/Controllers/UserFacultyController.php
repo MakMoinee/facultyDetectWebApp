@@ -73,7 +73,7 @@ class UserFacultyController extends Controller
 
                     if ($fileName != "") {
 
-                        $destinationPath2 = $_SERVER['DOCUMENT_ROOT'] . '/data/weights';
+                        $destinationPath2 = $_SERVER['DOCUMENT_ROOT'] . '/data/weights2';
                         $ptFileName = strtotime(now()) . "." . $ptFile->getClientOriginalExtension();
                         $isFile2 = $ptFile->move($destinationPath2,  $ptFileName);
                         chmod($destinationPath2, 0755);
@@ -84,7 +84,7 @@ class UserFacultyController extends Controller
                             $sonogram->facultyName = $facultyName;
                             $sonogram->imagePath = $fileName;
                             $sonogram->status = "";
-                            $sonogram->modelPath = "/data/weights/" . $ptFileName;
+                            $sonogram->modelPath = "/data/weights2/" . $ptFileName;
                             $isSave = $sonogram->save();
                             if ($isSave) {
                                 session()->put("successAddFaculty", true);
