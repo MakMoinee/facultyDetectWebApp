@@ -18,7 +18,7 @@ class AdminDetectionsController extends Controller
                 return redirect("/");
             }
 
-            $queryResult = DB::table("vwresults")->get();
+            $queryResult = DB::table("vwresults")->where('name','<>','unknown')->get();
             $detections = json_decode($queryResult, true);
             return view("admin.detections", ['detections' => $detections, 'searchKey' => '']);
         } else {

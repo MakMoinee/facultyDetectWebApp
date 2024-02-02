@@ -19,7 +19,7 @@ class UserFacultyController extends Controller
             $mUser = session()->pull("users");
             session()->put("users", $mUser);
             $userID = $mUser[0]['userID'];
-            $queryResult = DB::table("vwresults")->get();
+            $queryResult = DB::table("vwresults")->where('name','<>','unknown')->get();
             $detections = json_decode($queryResult, true);
             return view("user.faculty", ['detections' => $detections]);
         } else {
