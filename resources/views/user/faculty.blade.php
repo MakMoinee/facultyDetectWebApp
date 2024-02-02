@@ -161,8 +161,9 @@
                                         </svg>
                                     </th>
                                     <th>Faculty Name</th>
-                                    <th class="text-center">Date Detected</th>
+                                    <th class="text-center">Room</th>
                                     <th>Picture</th>
+                                    <th class="text-center">Date & Time Detected</th>
                                 </tr>
                             </thead>
                             <tbody>
