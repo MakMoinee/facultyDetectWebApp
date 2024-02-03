@@ -20,7 +20,7 @@ class AdminDetectionsController extends Controller
                 return redirect("/");
             }
             $searchKey = $request->query('search');
-            $queryResult = DB::table("vwresults")->where('name','<>','unknown')->get();
+            $queryResult = DB::table("vwresults")->where('name','<>','unknown')->orderBy('detectedDate', 'desc')->get();
             $detections = json_decode($queryResult, true);
             return view("admin.detections", ['detections' => $detections, 'searchKey' => '']);
         } else {
